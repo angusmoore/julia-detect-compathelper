@@ -1,0 +1,18 @@
+name: 'CompatHelper detector'
+description: 'Detect if PR is a CompatHelper or dependabot PR'
+author: 'Angus Moore'
+
+branding:
+  icon: 'aperture'
+  color: 'gray-dark'
+
+inputs:
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Detect if dependabot PR
+    - id: dependabot 
+    - run: |
+        echo "::set-output name=is_dependabot::$(julia --project -e 'include("autodetect-dependabot.jl"); print(AutodetectDependabot.is_dependabot_job())')"
+      shell: bash
