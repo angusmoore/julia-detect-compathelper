@@ -39,10 +39,10 @@ jobs:
         run: test ! -f "$HOME/julia-runtest"
         shell: bash
 
-      - name: Checkout julia-runtest
+      - name: Checkout local ation
         uses: actions/checkout@v2
         with:
-          path: ./.github/actions/julia-runtest
+          path: ./.github/actions/julia-detect-dependabot
 
       - uses: julia-actions/setup-julia@v1
         with:
