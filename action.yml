@@ -6,6 +6,11 @@ branding:
   icon: 'aperture'
   color: 'gray-dark'
 
+outputs:
+  is_dependabot:
+    description: 'Boolean for if this is a dependabot/CompatHelper branch'
+    value: ${{ steps.dependabot.outputs.is_dependabot }}
+
 runs:
   using: 'composite'
   steps:
@@ -14,3 +19,4 @@ runs:
       run: |
         echo "::set-output name=is_dependabot::$(julia --project -e 'include(joinpath(ENV["GITHUB_ACTION_PATH"], "autodetect-dependabot.jl")); print(AutodetectDependabot.is_dependabot_job())')"
       shell: bash
+
