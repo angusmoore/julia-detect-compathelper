@@ -27,8 +27,10 @@ Julia needs to be installed before this action can run. This can easily be achie
 You need to provide an `id` for the action, so that you can access the output variable `is_dependabot` in subsequent
 github actions steps.
 
-You can access the result `is_dependabot` (which is a Boolean) using the github actions [steps context](https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context). Eg, if you set the `id` for the `julia-detect-dependabot` action as
-`dependabot`, you would access the value in subsequent steps as: ${{ steps.dependabot.outputs.is_dependabot }}
+You can access the result `is_dependabot` (which is a *string* of either "true" or "false") using the github
+actions [steps context](https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context). Eg, if you
+set the `id` for the `julia-detect-dependabot` action as `dependabot`, you would access the value in subsequent steps
+as: ${{ steps.dependabot.outputs.is_dependabot }}
 
 An example workflow that uses this action might look like this:
 
@@ -42,12 +44,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        julia-version: ['1.0', '1', 'nightly']
+        julia-version: ['1', 'nightly']
         julia-arch: [x64, x86]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        exclude:
-          - os: macOS-latest
-            julia-arch: x86
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -55,11 +54,11 @@ jobs:
         with:
           version: ${{ matrix.julia-version }}
           arch: ${{ matrix.julia-arch }}
-      - uses: angusmoore/julia-detect-dependabot
+      - uses: angusmoore/julia-detect-dependabot@main
         id: dependabot
       - name: Custom package tests
         run: |
-            julia --project -e 'import Pkg; Pkg.test(; force_latest_compatible_version = ENV["is_dependabot"])'
+            julia --project -e 'import Pkg; Pkg.test(; force_latest_compatible_version = ENV["is_dependabot"] == "true")'
         env:
           is_dependabot: ${{ steps.dependabot.outputs.is_dependabot }}
 
