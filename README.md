@@ -58,7 +58,7 @@ jobs:
         id: dependabot
       - name: Custom package tests
         run: |
-            julia --project -e 'import Pkg; Pkg.test(; force_latest_compatible_version = ENV["is_dependabot"] == "true")'
+            julia --project -e 'import Pkg; Pkg.test(; force_latest_compatible_version = parse(Bool, ENV["IS_DEPENDABOT"]))'
         env:
           is_dependabot: ${{ steps.dependabot.outputs.is_dependabot }}
 
