@@ -15,10 +15,10 @@ situation might arise because you need to pass in custom arguments, or flags to 
 supported by julia-runtest.
 
 See also these issues
-[1](https://github.com/julia-actions/julia-runtest/issues/47)
-[2](https://github.com/JuliaRegistries/CompatHelper.jl/issues/298)
+[[1]](https://github.com/julia-actions/julia-runtest/issues/47)
+[[2]](https://github.com/JuliaRegistries/CompatHelper.jl/issues/298)
 for discussion of automatically setting `force_latest_compatible_version` automatically in CI scrits, which this action
-tries to solve (specifically this is row 2 in [1](https://github.com/julia-actions/julia-runtest/issues/47)).
+tries to solve (specifically this is row 2 in [[1]](https://github.com/julia-actions/julia-runtest/issues/47)).
 
 ## Usage
 
