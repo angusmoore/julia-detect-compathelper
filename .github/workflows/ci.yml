@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout Example.jl
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: julia-actions/Example.jl
 
@@ -39,8 +39,8 @@ jobs:
         run: test ! -f "$HOME/julia-runtest"
         shell: bash
 
-      - name: Checkout local ation
-        uses: actions/checkout@v2
+      - name: Checkout local action
+        uses: actions/checkout@v3
         with:
           path: ./.github/actions/julia-detect-dependabot
 
@@ -49,7 +49,7 @@ jobs:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
 
-      - uses: actions/cache@v1
+      - uses: actions/cache@v3
         env:
           cache-name: cache-artifacts
         with:
