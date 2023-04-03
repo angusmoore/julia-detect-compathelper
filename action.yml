@@ -17,6 +17,6 @@ runs:
     - name: Detect if dependabot PR
       id: dependabot 
       run: |
-        echo "is_dependabot::$(julia --project -e 'include(joinpath(ENV["GITHUB_ACTION_PATH"], "autodetect-dependabot.jl")); print(AutodetectDependabot.is_dependabot_job())')" >> $GITHUB_OUTPUT
+        echo "is_dependabot=$(julia --project -e 'include(joinpath(ENV["GITHUB_ACTION_PATH"], "autodetect-dependabot.jl")); print(AutodetectDependabot.is_dependabot_job())')" >> $GITHUB_OUTPUT
       shell: bash
 
